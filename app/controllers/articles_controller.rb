@@ -4,7 +4,8 @@ class ArticlesController < ApplicationController
   end
 
   def index
-    @articles, @tag = Article.search_by_tag_name(params[:tag])
+    articles, @tag = Article.search_by_tag_name(params[:tag])
+    @articles = ArticleDecorator.decorate_collection(articles)
   end
 
   def new

@@ -28,5 +28,10 @@ describe ArticleDecorator do
 
       decorator.comments_count.should == "1 Comment"
     end
+
+    it "works also for each article in a collection" do
+      decorator = ArticleDecorator.decorate_collection([@article])
+      decorator[0].comments_count.should == "1 Comment"
+    end
   end
 end
