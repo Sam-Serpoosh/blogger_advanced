@@ -45,4 +45,16 @@ describe ArticleDecorator do
       decorator[0].comments_count.should == "1 Comment"
     end
   end
+
+  context "#to_json" do
+    it "converts to json" do
+      article = Article.create!(title: "foo", body: "bar")
+      decorator = ArticleDecorator.find(article.id)
+
+      json = decorator.to_json
+
+      json.should include "\"body\":\"bar\""
+      json.should include "\"title\":\"foo\""
+    end
+  end
 end
