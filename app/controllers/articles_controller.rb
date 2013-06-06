@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   def show
-    @article = ArticleDecorator.new(Article.find(params[:id]))
+    @article = ArticleDecorator.find(params[:id])
   end
 
   def index

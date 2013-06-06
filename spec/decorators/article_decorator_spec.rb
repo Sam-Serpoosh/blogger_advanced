@@ -1,12 +1,23 @@
 require 'spec_helper'
 
 describe ArticleDecorator do
-  it "formats the created_at" do
-    article = stub(:created_at => 
-                   Time.parse("2013-05-19T20:15:30Z"))
-    decorator = ArticleDecorator.new(article)
+  context "#finders" do
+    it "works with active record finders" do
+      article = Article.create!(title: "foo", body: "bar")
+      decorator = ArticleDecorator.find(article.id)
+      decorator.should be_a ArticleDecorator
+      decorator.source.title.should == "foo"
+    end
+  end
 
-    decorator.formatted_created_at.should == "05/19/2013 - 20:15"
+  context "#formatted_created_at" do
+    it "formats the created_at" do
+      article = stub(:created_at => 
+                     Time.parse("2013-05-19T20:15:30Z"))
+                     decorator = ArticleDecorator.new(article)
+
+                     decorator.formatted_created_at.should == "05/19/2013 - 20:15"
+    end
   end
 
 

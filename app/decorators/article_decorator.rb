@@ -1,5 +1,6 @@
 class ArticleDecorator < Draper::Decorator
   delegate_all
+  decorates_finders
 
   # Define presentation-specific methods here. Helpers are accessed through
   # `helpers` (aka `h`). You can override attributes, for example:
@@ -10,13 +11,15 @@ class ArticleDecorator < Draper::Decorator
   #     end
   #   end
   #
+
+  alias :article :source
   
   def formatted_created_at
-    source.created_at.strftime("%m/%d/%Y - %H:%M")
+    article.created_at.strftime("%m/%d/%Y - %H:%M")
   end
 
   def comments_count
-    h.pluralize(source.comments.count, "Comment")
+    h.pluralize(article.comments.count, "Comment")
   end
 
 end
